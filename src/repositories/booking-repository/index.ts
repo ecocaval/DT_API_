@@ -1,5 +1,13 @@
 import { prisma } from '@/config';
 
+async function findBookingByUserId(userId: number) {
+  return await prisma.booking.findFirst({
+    where: {
+      userId: userId,
+    },
+  });
+}
+
 async function findBookingByRoomId(roomId: number) {
   const booking = await prisma.booking.findFirst({
     where: {
@@ -20,6 +28,7 @@ async function createBooking(roomId: number, userId: number) {
 }
 
 export default {
+  findBookingByUserId,
   findBookingByRoomId,
   createBooking,
 };
